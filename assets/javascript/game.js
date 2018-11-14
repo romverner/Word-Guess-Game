@@ -1,5 +1,5 @@
 // Setting global variables
-var wordArray = ['amazing', 'jazz', 'automobile', 'hamster'];
+var wordArray = ['amazing', 'jazz', 'automobile', 'hamster', 'patrick'];
 var letterArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 var guessedLetters = [];
 var userGuessCount = 0;
@@ -53,6 +53,13 @@ document.onkeyup = function(event) {
         guessedLetters.push(String(userGuess));
         guessedLettersDoc.textContent = guessedLetters;
         userInfoDoc.textContent = "Correct!";
+
+        // For loop that reveals letters in hiddenWord if correctly guessed
+        for (i = 0; i < hiddenWord.length; i++) {
+            var location = parsedWord.indexOf(userGuess, i);
+            hiddenWord[location] = userGuess;
+            hiddenLettersDoc.textContent = hiddenWord;
+        };
     }
 
     else if (letterArray.includes(userGuess) === true && guessedLetters.includes(userGuess) === false && parsedWord.includes(userGuess) === false) {
@@ -62,7 +69,6 @@ document.onkeyup = function(event) {
     }
 
     else if (guessedLetters.includes(userGuess) === true) {
-        guessedLetters.push(String(userGuess));
         guessedLettersDoc.textContent = guessedLetters;
         userInfoDoc.textContent = "You've already guessed that letter!";
     }
@@ -70,9 +76,4 @@ document.onkeyup = function(event) {
     else {
         userInfoDoc.textContent = "Please enter a valid letter!";
     };
-
-    // Console.logs for troubleshooting
-    console.log(randomWord);
-    console.log(parsedWord);
-    console.log(hiddenWord);
 };
