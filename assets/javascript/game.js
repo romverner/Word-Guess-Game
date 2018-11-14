@@ -14,7 +14,9 @@ document.onkeyup = function(event) {
     var userGuess = event.key;
 
     // Creating other local variables
+    var hiddenLettersDoc = document.getElementById("hidden-word");
     var guessedLettersDoc = document.getElementById("user-guesses");
+    var userInfoDoc = document.getElementById("user-info");
 
     // Function that randomly chooses a word from wordArray
     function randWord() {
@@ -42,28 +44,31 @@ document.onkeyup = function(event) {
         randomWord = randWord();
         parsedWord = parseWord(randomWord);
         hiddenWord = underWord();
+        hiddenLettersDoc.textContent = hiddenWord;
+        guessedLetters = [];
+        guessedLettersDoc.textContent = guessedLetters;
     }
 
     else if (letterArray.includes(userGuess) === true && guessedLetters.includes(userGuess) === false && parsedWord.includes(userGuess) === true) {
         guessedLetters.push(String(userGuess));
         guessedLettersDoc.textContent = guessedLetters;
-        console.log("Correct!");
+        userInfoDoc.textContent = "Correct!";
     }
 
     else if (letterArray.includes(userGuess) === true && guessedLetters.includes(userGuess) === false && parsedWord.includes(userGuess) === false) {
         guessedLetters.push(String(userGuess));
         guessedLettersDoc.textContent = guessedLetters;
-        console.log("Incorrect!")
+        userInfoDoc.textContent = "Incorrect!";
     }
 
     else if (guessedLetters.includes(userGuess) === true) {
         guessedLetters.push(String(userGuess));
         guessedLettersDoc.textContent = guessedLetters;
-        console.log("You've already guessed that letter!");
+        userInfoDoc.textContent = "You've already guessed that letter!";
     }
 
     else {
-        console.log("Please enter a valid letter!");
+        userInfoDoc.textContent = "Please enter a valid letter!";
     };
 
     // Console.logs for troubleshooting
