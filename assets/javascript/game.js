@@ -2,6 +2,7 @@
 var wordArray = ['amazing', 'jazz', 'automobile', 'hamster'];
 var letterArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 var guessedLetters = [];
+var userGuessCount = 0;
 var randomWord = "";
 var parsedWord = [];
 var hiddenWord = [];
@@ -11,6 +12,9 @@ document.onkeyup = function(event) {
 
     // Storing key presses
     var userGuess = event.key;
+
+    // Creating other local variables
+    var guessedLettersDoc = document.getElementById("user-guesses");
 
     // Function that randomly chooses a word from wordArray
     function randWord() {
@@ -42,14 +46,19 @@ document.onkeyup = function(event) {
 
     else if (letterArray.includes(userGuess) === true && guessedLetters.includes(userGuess) === false && parsedWord.includes(userGuess) === true) {
         guessedLetters.push(String(userGuess));
+        guessedLettersDoc.textContent = guessedLetters;
         console.log("Correct!");
     }
 
     else if (letterArray.includes(userGuess) === true && guessedLetters.includes(userGuess) === false && parsedWord.includes(userGuess) === false) {
+        guessedLetters.push(String(userGuess));
+        guessedLettersDoc.textContent = guessedLetters;
         console.log("Incorrect!")
     }
 
     else if (guessedLetters.includes(userGuess) === true) {
+        guessedLetters.push(String(userGuess));
+        guessedLettersDoc.textContent = guessedLetters;
         console.log("You've already guessed that letter!");
     }
 
