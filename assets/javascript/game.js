@@ -1,8 +1,9 @@
 // Setting global variables
-var wordArray = ['richard', 'jeremy', 'james', 'power', 'hammer', 'koenigsegg', 'oliver'];
+var wordArray = ['richard', 'jeremy', 'james', 'power', 'hammer', 'koenigsegg', 'oliver', 'dacia', 'stig', 'track'];
 var letterArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 var guessedLetters = [];
 var userGuessCount = 0;
+var guessRemain = 7;
 var randomWord = "";
 var parsedWord = [];
 var hiddenWord = [];
@@ -17,6 +18,7 @@ document.onkeyup = function(event) {
     var hiddenLettersDoc = document.getElementById("hidden-word");
     var guessedLettersDoc = document.getElementById("user-guesses");
     var userInfoDoc = document.getElementById("user-info");
+    var guessRemainDoc = document.getElementById("guess-remain");
 
     // Function that randomly chooses a word from wordArray
     function randWord() {
@@ -55,6 +57,8 @@ document.onkeyup = function(event) {
     // If game not over, tracks user keys, determines if letter has been used or is an invalid input
     if (userGuessCount < 7) {
         if (userGuess === '=') {
+            userGuessCount = 0;
+            guessRemain = 7;
             randomWord = randWord();
             parsedWord = parseWord(randomWord);
             hiddenWord = underWord();
@@ -62,8 +66,10 @@ document.onkeyup = function(event) {
             guessedLetters = [];
             guessedLettersDoc.textContent = guessedLetters;
             userInfoDoc.textContent = "Guess the word that appears here!";
+            guessRemainDoc.textContent = guessRemain;
         }
 
+        // Required to maintain win message if follow-up keys pressed
         else if (winningCondition(hiddenWord) === true) {
             userInfoDoc.textContent = "You Win! Press '=' to try a new word.";
         }
@@ -80,6 +86,7 @@ document.onkeyup = function(event) {
                 hiddenLettersDoc.textContent = hiddenWord;
             };
 
+            // Required for immediate feedback of win
             if (winningCondition(hiddenWord) === true) {
                 userInfoDoc.textContent = "You Win! Press '=' to try a new word.";
             }
@@ -89,12 +96,14 @@ document.onkeyup = function(event) {
             guessedLetters.push(String(userGuess));
             guessedLettersDoc.textContent = guessedLetters;
             userGuessCount += 1;
+            guessRemain -= 1;
             
             // Checking number of incorrect user attempts, game over if seven attempts
             if (userGuessCount === 1) {
                 userInfoDoc.textContent = "Game Over!";
             }
             userInfoDoc.textContent = "Incorrect!";
+            guessRemainDoc.textContent = guessRemain;
         }
 
         else if (guessedLetters.includes(userGuess) === true) {
@@ -116,5 +125,6 @@ document.onkeyup = function(event) {
         guessedLetters = [];
         guessedLettersDoc.textContent = guessedLetters;
         userGuessCount = 0;
+        guessRemain = 7;
     };
 };
