@@ -11,26 +11,29 @@
 </head>
 
 <body>
-    <div class="container-fluid text-center mt-3">
+    <div class="container-fluid bg-light border-bottom border-3 text-center pt-3 pb-3">
         <h1>Word Guess Game</h1>
     </div>
 
-    <div class="container mt-5">
+    <div class="container bg-light border-left border-bottom border-right border-3 pt-5">
         <div class ="row">
             
-            <div class="col-lg-6 col-sm-12">
+            <div class="col-md-6 col-sm-12">
+                <div class="container">
+                    <img src="https://pmcdeadline2.files.wordpress.com/2014/07/top-gear.jpg" class="img-fluid float-left rounded mb-3" alt="top gear hosts">
+                </div>
                 <h4>Rules:</h4>
-                <p> The word guessing game, or 'Hangman', is really simple! All you have to do is guess the letters in the randomly chosen word!
-                    You only have five wrong guesses, so choose carefully!
+                <p> The word guessing game, or 'Hangman', is really simple! All you have to do is guess the letters in the randomly chosen word.
+                    You only have seven wrong guesses, so choose carefully!
                 </p>
-                <p><strong>To begin the game, please press the equal sign (=) key!</strong></p>
+                <p><strong>To begin/restart the game, please press the equal sign (=) key!</strong></p>
             </div>
 
-            <div class ="col-lg-6 col-sm-12">
+            <div class ="col-md-6 col-sm-12">
                 <h2>Word:</h2>
                 <h4 class="text-center"><span id="hidden-word">Guess the word that appears here!</span></h4>
                 <p class="text-center mt-3"><span id="user-info"></span></p>
-                <h4 class="mt-3">Guesses: </h4>
+                <h4 class="mt-3">Letters Guessed: </h4>
                 <p><strong><span id="user-guesses"></span></strong></p>
             </div>
 
