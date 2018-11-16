@@ -71,7 +71,7 @@ document.onkeyup = function(event) {
 
         // Required to maintain win message if follow-up keys pressed
         else if (winningCondition(hiddenWord) === true) {
-            userInfoDoc.textContent = "You Win! Press '=' to try a new word.";
+            userInfoDoc.textContent = "You Win!";
         }
 
         else if (letterArray.includes(userGuess) === true && guessedLetters.includes(userGuess) === false && parsedWord.includes(userGuess) === true) {
@@ -88,7 +88,7 @@ document.onkeyup = function(event) {
 
             // Required for immediate feedback of win
             if (winningCondition(hiddenWord) === true) {
-                userInfoDoc.textContent = "You Win! Press '=' to try a new word.";
+                userInfoDoc.textContent = "You Win!";
             }
         }
 
@@ -98,10 +98,6 @@ document.onkeyup = function(event) {
             userGuessCount += 1;
             guessRemain -= 1;
             
-            // Checking number of incorrect user attempts, game over if seven attempts
-            if (userGuessCount === 1) {
-                userInfoDoc.textContent = "Game Over!";
-            }
             userInfoDoc.textContent = "Incorrect!";
             guessRemainDoc.textContent = guessRemain;
         }
