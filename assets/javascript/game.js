@@ -2,11 +2,13 @@
 var wordArray = ['richard', 'jeremy', 'james', 'power', 'hammer', 'koenigsegg', 'oliver', 'dacia', 'stig', 'track'];
 var letterArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 var guessedLetters = [];
+var guessedLettersJoin = [];
 var userGuessCount = 0;
 var guessRemain = 7;
 var randomWord = "";
 var parsedWord = [];
 var hiddenWord = [];
+var hiddenWordJoin = [];
 
 // Function that runs when it detects if key is pressed, controls entire game
 document.onkeyup = function(event) {
@@ -62,28 +64,32 @@ document.onkeyup = function(event) {
             randomWord = randWord();
             parsedWord = parseWord(randomWord);
             hiddenWord = underWord();
-            hiddenLettersDoc.textContent = hiddenWord;
+            hiddenWordJoin = hiddenWord.join(" ");
+            hiddenLettersDoc.textContent = hiddenWordJoin;
             guessedLetters = [];
+            guessedLettersJoin = [];
             guessedLettersDoc.textContent = guessedLetters;
             userInfoDoc.textContent = "Guess the word that appears here!";
             guessRemainDoc.textContent = guessRemain;
         }
 
-        // Required to maintain win message if follow-up keys pressed
+        // Required to maintain win message if follow-up keys pressed post-win
         else if (winningCondition(hiddenWord) === true) {
             userInfoDoc.textContent = "You Win!";
         }
 
         else if (letterArray.includes(userGuess) === true && guessedLetters.includes(userGuess) === false && parsedWord.includes(userGuess) === true) {
             guessedLetters.push(String(userGuess));
-            guessedLettersDoc.textContent = guessedLetters;
+            guessedLettersJoin = guessedLetters.join(" ");
+            guessedLettersDoc.textContent = guessedLettersJoin.toUpperCase();
             userInfoDoc.textContent = "Correct!";
 
             // For loop that reveals letters in hiddenWord if correctly guessed
             for (i = 0; i < hiddenWord.length; i++) {
                 var location = parsedWord.indexOf(userGuess, i);
                 hiddenWord[location] = userGuess;
-                hiddenLettersDoc.textContent = hiddenWord;
+                hiddenWordJoin = hiddenWord.join(" ");
+                hiddenLettersDoc.textContent = hiddenWordJoin;
             };
 
             // Required for immediate feedback of win
@@ -94,7 +100,8 @@ document.onkeyup = function(event) {
 
         else if (letterArray.includes(userGuess) === true && guessedLetters.includes(userGuess) === false && parsedWord.includes(userGuess) === false) {
             guessedLetters.push(String(userGuess));
-            guessedLettersDoc.textContent = guessedLetters;
+            guessedLettersJoin = guessedLetters.join(" ");
+            guessedLettersDoc.textContent = guessedLettersJoin.toUpperCase();
             userGuessCount += 1;
             guessRemain -= 1;
             
@@ -103,7 +110,8 @@ document.onkeyup = function(event) {
         }
 
         else if (guessedLetters.includes(userGuess) === true) {
-            guessedLettersDoc.textContent = guessedLetters;
+            guessedLettersJoin = guessedLetters.join(" ");
+            guessedLettersDoc.textContent = guessedLettersJoin.toUpperCase();
             userInfoDoc.textContent = "You've already guessed that letter!";
         }
 
@@ -117,9 +125,11 @@ document.onkeyup = function(event) {
         randomWord = randWord();
         parsedWord = parseWord(randomWord);
         hiddenWord = underWord();
-        hiddenLettersDoc.textContent = hiddenWord;
+        hiddenWordJoin = hiddenWord.join(" ");
+        hiddenLettersDoc.textContent = hiddenWordJoin;
         guessedLetters = [];
-        guessedLettersDoc.textContent = guessedLetters;
+        guessedLettersJoin = guessedLetters.join(" ");
+        guessedLettersDoc.textContent = guessedLettersJoin.toUpperCase();
         userGuessCount = 0;
         guessRemain = 7;
     };
